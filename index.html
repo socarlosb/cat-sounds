@@ -3,18 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cat sounds</title>
+    <title>Sounds to Attract Cats</title>
   </head>
   <body>
-    <h1 style="text-align: center">Cat Sounds</h1>
+    <h1 style="text-align: center">Sounds to Attract Cats</h1>
     <div id="cat-sounds-list">
-      <div class="sound-item">
-        <div class="sound-info">
-          <span class="sound-title">Classic Meow</span>
-          <span class="sound-desc">A typical cat meow.</span>
-        </div>
-        <button class="play-btn" data-sound="sounds/cat.mp3">Play</button>
-      </div>
       <div class="sound-item">
         <div class="sound-info">
           <span class="sound-title">Kitten Meows</span>
@@ -26,10 +19,19 @@
       </div>
       <div class="sound-item">
         <div class="sound-info">
-          <span class="sound-title">Cat Purr</span>
-          <span class="sound-desc">A soft purring sound.</span>
+          <span class="sound-title">Kitten Sound 2</span>
+          <span class="sound-desc">Another kitten sound.</span>
         </div>
-        <button class="play-btn" data-sound="sounds/cat-purr.mp3">Play</button>
+        <button class="play-btn" data-sound="sounds/kitten-sound-2.mp3">
+          Play
+        </button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Classic Meow</span>
+          <span class="sound-desc">A typical cat meow.</span>
+        </div>
+        <button class="play-btn" data-sound="sounds/cat.mp3">Play</button>
       </div>
       <div class="sound-item">
         <div class="sound-info">
@@ -45,12 +47,30 @@
       </div>
       <div class="sound-item">
         <div class="sound-info">
-          <span class="sound-title">Kitten Sound 2</span>
-          <span class="sound-desc">Another kitten sound.</span>
+          <span class="sound-title">Cat Purr</span>
+          <span class="sound-desc">A soft purring sound.</span>
         </div>
-        <button class="play-btn" data-sound="sounds/kitten-sound-2.mp3">
+        <button class="play-btn" data-sound="sounds/cat-purr.mp3">Play</button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Forest Birds</span>
+          <span class="sound-desc"
+            >A lively forest birds chorus to intrigue your cat.</span
+          >
+        </div>
+        <button class="play-btn" data-sound="sounds/forestbirds-2.mp3">
           Play
         </button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Cardinal Song</span>
+          <span class="sound-desc"
+            >Distinct cardinal bird call to catch a cat's attention.</span
+          >
+        </div>
+        <button class="play-btn" data-sound="sounds/cardinal.mp3">Play</button>
       </div>
     </div>
     <audio id="audio-player"></audio>
@@ -110,6 +130,7 @@
         }
         .play-btn {
           margin-top: 0.7em;
+          width: 100%;
         }
       }
     </style>
@@ -130,6 +151,7 @@
               currentBtn.classList.remove("playing");
             }
             audio.src = this.getAttribute("data-sound");
+            audio.loop = true;
             audio.play();
             this.textContent = "Stop";
             this.classList.add("playing");

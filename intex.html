@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat sounds</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">Cat Sounds</h1>
+    <div id="cat-sounds-list">
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Classic Meow</span>
+          <span class="sound-desc">A typical cat meow.</span>
+        </div>
+        <button class="play-btn" data-sound="sounds/cat.mp3">Play</button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Kitten Meows</span>
+          <span class="sound-desc">Cute kitten meowing.</span>
+        </div>
+        <button class="play-btn" data-sound="sounds/kitten-meows.mp3">
+          Play
+        </button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Cat Purr</span>
+          <span class="sound-desc">A soft purring sound.</span>
+        </div>
+        <button class="play-btn" data-sound="sounds/cat-purr.mp3">Play</button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Chattering & Meowing</span>
+          <span class="sound-desc">Cat chattering and meowing.</span>
+        </div>
+        <button
+          class="play-btn"
+          data-sound="sounds/sound-effect-cat-chattering-and-meowing.mp3"
+        >
+          Play
+        </button>
+      </div>
+      <div class="sound-item">
+        <div class="sound-info">
+          <span class="sound-title">Kitten Sound 2</span>
+          <span class="sound-desc">Another kitten sound.</span>
+        </div>
+        <button class="play-btn" data-sound="sounds/kitten-sound-2.mp3">
+          Play
+        </button>
+      </div>
+    </div>
+    <audio id="audio-player"></audio>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        background: #f8f8f8;
+      }
+      #cat-sounds-list {
+        max-width: 400px;
+        margin: 1.5em auto;
+        padding: 0 1em;
+      }
+      .sound-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px #0001;
+        margin-bottom: 1em;
+        padding: 1em;
+      }
+      .sound-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .sound-title {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      .sound-desc {
+        font-size: 0.95em;
+        color: #666;
+      }
+      .play-btn {
+        background: #ff9800;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 0.5em 1.2em;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .play-btn.playing {
+        background: #e53935;
+      }
+      @media (max-width: 500px) {
+        #cat-sounds-list {
+          max-width: 100%;
+        }
+        .sound-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .play-btn {
+          margin-top: 0.7em;
+        }
+      }
+    </style>
+    <script>
+      const audio = document.getElementById("audio-player");
+      let currentBtn = null;
+      document.querySelectorAll(".play-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          if (audio.src && !audio.paused && currentBtn === this) {
+            audio.pause();
+            audio.currentTime = 0;
+            this.textContent = "Play";
+            this.classList.remove("playing");
+            currentBtn = null;
+          } else {
+            if (currentBtn) {
+              currentBtn.textContent = "Play";
+              currentBtn.classList.remove("playing");
+            }
+            audio.src = this.getAttribute("data-sound");
+            audio.play();
+            this.textContent = "Stop";
+            this.classList.add("playing");
+            currentBtn = this;
+          }
+        });
+      });
+      audio.addEventListener("ended", () => {
+        if (currentBtn) {
+          currentBtn.textContent = "Play";
+          currentBtn.classList.remove("playing");
+          currentBtn = null;
+        }
+      });
+    </script>
+  </body>
+</html>
